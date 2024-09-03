@@ -1,0 +1,1 @@
+web: gunicorn deiproject.wsgi --log-file -
