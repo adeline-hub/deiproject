@@ -1,0 +1,7 @@
+version: 1
+services:  
+  - type: web    
+    name: deiproject    
+    env: python    
+    buildCommand: pip install -r requirements.txt    
+    startCommand: gunicorn deiproject.wsgi:application
