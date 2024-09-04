@@ -77,12 +77,37 @@ WSGI_APPLICATION = 'deiproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+
+It looks like your settings.py file has some incorrect and duplicate database configurations. Let's clean up and correct the configuration for using a PostgreSQL database in Django.
+
+Correct settings.py Configuration
+You have two conflicting DATABASES configurations. You should use only one, and it should be properly formatted. Here is the corrected version:
+
+python
+Copy code
+# Database
+# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+"""
 import dj_database_url
 
-
-
+# Using dj_database_url to configure the database
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://dei_db_user:1Ry9Vw1IOrN2wnHMSgmCFDpBbkjXBAxQ@localhost:5432/dei-db')
+    'default': dj_database_url.config(
+        default='postgres://dei_db_user:1Ry9Vw1IOrN2wnHMSgmCFDpBbkjXBAxQ@localhost:5432/dei-db'
+    )
+}
+
+# Alternatively, you can define the DATABASES dictionary directly (not using dj_database_url):
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dei-db',
+        'USER': 'dei_db_user',
+        'PASSWORD': '1Ry9Vw1IOrN2wnHMSgmCFDpBbkjXBAxQ',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
 }
 
 
