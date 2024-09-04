@@ -79,6 +79,8 @@ WSGI_APPLICATION = 'deiproject.wsgi.application'
 
 import dj_database_url
 
+
+
 DATABASES = {
     'default': dj_database_url.config(default='postgres://dei_db_user:1Ry9Vw1IOrN2wnHMSgmCFDpBbkjXBAxQ@localhost:5432/dei-db')
 }
