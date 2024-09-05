@@ -74,17 +74,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'deiproject.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-
-It looks like your settings.py file has some incorrect and duplicate database configurations. Let's clean up and correct the configuration for using a PostgreSQL database in Django.
-
-Correct settings.py Configuration
-You have two conflicting DATABASES configurations. You should use only one, and it should be properly formatted. Here is the corrected version:
-
-python
-Copy code
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 """
