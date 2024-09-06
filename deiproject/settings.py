@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-#9cou_duvkossm-p@&l5esvy5o@hyft&!%lrbrd8)8vlw$3_-g
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['deiproject.onrender.com/']
+ALLOWED_HOSTS = ['deiproject.onrender.com']
 DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 
 
