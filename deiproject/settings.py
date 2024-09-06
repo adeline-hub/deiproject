@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'deiproject.wsgi.application'
 
 if not DEBUG:
     DATABASES = {
-	"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
+	"default": dj_database_url.parse(os.environ.get("postgresql://dei_db_user:1Ry9Vw1IOrN2wnHMSgmCFDpBbkjXBAxQ@dpg-crbclod6l47c73d47ukg-a/dei_db"))
 }
 
 
