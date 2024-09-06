@@ -81,27 +81,21 @@ WSGI_APPLICATION = 'deiproject.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 
-# Using dj_database_url to configure the database
-DATABASES = {
-    'default': dj_database_url.config(
-        default='postgres://dei_db_user:1Ry9Vw1IOrN2wnHMSgmCFDpBbkjXBAxQ@localhost:5432/dei-db'
-    )
+if not DEBUG:
+    DATABASES = {
+	"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 
-# Alternatively, you can define the DATABASES dictionary directly (not using dj_database_url):
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dei-db',
-        'USER': 'dei_db_user',
-        'PASSWORD': '1Ry9Vw1IOrN2wnHMSgmCFDpBbkjXBAxQ',
-        'HOST': 'localhost',
-        'PORT': '5432',
+
+else:
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
-
-"""
+    
 #DATABASES = {    'default': {        'ENGINE': 'django.db.backends.sqlite3',        'NAME': BASE_DIR / 'db.sqlite3',    }}
 
 
