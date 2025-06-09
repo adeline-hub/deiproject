@@ -12,15 +12,15 @@ app = dash.Dash(
     assets_folder='assets',
     meta_tags=[
         {"name": "description", "content": "Explore a world of deities through data"},
-        {"property": "og:image", "content": "/assets/share.png"},
-        {"name": "twitter:image", "content": "/assets/share.png"},
+        {"property": "og:image", "content": "/assets/https://github.com/adeline-hub/deiproject/blob/main/assets/logo%20big%20challenges.png?raw=true"},
+        {"name": "twitter:image", "content": "/assets/https://github.com/adeline-hub/deiproject/blob/main/assets/logo%20big%20challenges.png?raw=true"},
     ]
 )
 server = app.server
 app.title = "Mythic Atlas"
 
 # Layout
-app.layout = html.Div(style={"backgroundColor": "black", "color": "white", "fontFamily": "Courier New"}, children=[
+app.layout = html.Div(style={"backgroundColor": "black", "color": "#33FFA2", "fontFamily": "Courier New"}, children=[
     html.H1("Mythic Atlas: Explore Global Deities", style={"textAlign": "center"}),
 
     html.Div([
