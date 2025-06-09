@@ -78,10 +78,36 @@ def update_output(pantheon, sex, title):
     ]) if not filtered_df.empty else "No deities match the selected filters."
 
     pie = px.pie(filtered_df, names='Sex', title='Deities by Sex')
-    bar = px.bar(filtered_df['Pantheon'].value_counts().reset_index(),
-                 x='index', y='Pantheon', labels={'index': 'Pantheon', 'Pantheon': 'Count'},
+    pantheon_counts = filtered_df['Pantheon'].value_counts().reset_index()
+    pantheon_counts.columns = ['Pantheon', 'Count']  # Rename columns clearly
+
+    bar = px.bar(pantheon_counts,
+                 x='Pantheon', y='Count',
+                 labels={'Pantheon': 'Pantheon', 'Count': 'Number of Deities'},
                  title='Number of Deities per Pantheon')
-    treemap = px.treemap(filtered_df, path=['Values'], title='Treemap of Values')
+
+    # Clean rows with non-null Values
+    values_df = filtered_df.dropna(subset=['Values']).copy()
+
+    # Split the comma-separated values into lists
+    values_df['Values'] = values_df['Values'].str.split(',')
+
+    # Remove whitespace around split items
+    values_df['Values'] = values_df['Values'].apply(lambda lst: [v.strip() for v in lst])
+
+    # Explode to long format (one value per row)
+    values_df = values_df.explode('Values')
+
+    # Now create the treemap
+    # Drop rows where 'Values' is NaN
+    clean_df = values_df.dropna(subset=['Values'])
+
+    # Aggregate counts for treemap
+    value_counts = clean_df['Values'].value_counts().reset_index()
+    value_counts.columns = ['Values', 'Count']
+
+    # Create treemap
+    treemap = px.treemap(value_counts, path=['Values'], values='Count', title='Treemap of Values')
 
     for fig in (pie, bar, treemap):
         fig.update_layout(paper_bgcolor='black', font_color='white')
@@ -89,7 +115,4 @@ def update_output(pantheon, sex, title):
     return deity_info, pie, bar, treemap
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
-
-
-
+    app.run(debug=True, port=8055)
