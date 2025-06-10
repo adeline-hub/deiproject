@@ -4,7 +4,7 @@ import pandas as pd
 import plotly.express as px
 
 # Load dataset
-df = pd.read_csv("deities-v2.csv")  # Replace with your full file path if needed
+df = pd.read_csv("cleaned_deities.csv")  # Replace with your full file path if needed
 
 # Initialize app with meta tags
 app = dash.Dash(
@@ -12,8 +12,13 @@ app = dash.Dash(
     assets_folder='assets',
     meta_tags=[
         {"name": "description", "content": "Explore a world of deities through data"},
+        {"property": "og:title", "content": "Explore a world of deities through data"},
+        {"property": "og:description", "content": "Mapping Mythic Atlas"},
         {"property": "og:image", "content": "/assets/https://github.com/adeline-hub/deiproject/blob/main/assets/logo%20big%20challenges.png?raw=true"},
-        {"name": "twitter:image", "content": "/assets/https://github.com/adeline-hub/deiproject/blob/main/assets/logo%20big%20challenges.png?raw=true"},
+        {"property": "og:type", "content": "website"},
+        {"name": "twitter:card", "content": "summary_large_image"},
+        {"name": "twitter:title", "content": "Explore a world of deities through data"},
+        {"name": "twitter:image", "content": "/assets/favicon.io"},
     ]
 )
 server = app.server
@@ -45,7 +50,10 @@ app.layout = html.Div(style={"backgroundColor": "black", "color": "#33FFA2", "fo
             placeholder="Select Title"
         ),
     ], style={"width": "30%", "float": "left"}),
+    #], style = {  'background-color': '#ffee58',  'border-color': '#FF33FF ',  'color': '#FF33FF',"width": "30%", "float": "left"}),       
 
+    
+    
     html.Div(id='deity-output', style={"marginLeft": "35%"}),
 
     dcc.Graph(id='sex-pie'),
